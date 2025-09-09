@@ -1,62 +1,221 @@
-import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linha do Tempo das Inovações Tecnológicas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
 
-const timeline = [
-  {
-    era: "Era Pré-Histórica",
-    items: [
-      { ano: "~500.000 a.C.", nome: "Fogo", desc: "Controle do fogo, base para sobrevivência e culinária." },
-      { ano: "~2,5 milhões a.C.", nome: "Ferramentas de pedra", desc: "Primeiras ferramentas para caça e corte." },
-      { ano: "~10.000 a.C.", nome: "Agricultura", desc: "Revolução agrícola, início das civilizações." },
-      { ano: "~3.500 a.C.", nome: "Roda", desc: "Transporte e mecânica." },
-      { ano: "~3.200 a.C.", nome: "Escrita", desc: "Registro de conhecimento." },
-    ],
-  },
-  {
-    era: "Idade Antiga",
-    items: [
-      { ano: "Bronze/Ferro", nome: "Metalurgia", desc: "Armas, ferramentas, agricultura." },
-      { ano: "Roma", nome: "Aquedutos e engenharia", desc: "Estradas, pontes, concreto." },
-      { ano: "Egito/Grécia", nome: "Matemática e Astronomia", desc: "Bases do conhecimento científico." },
-      { ano: "séc. II", nome: "Papel e Impressão rudimentar", desc: "Na China." },
-    ],
-  },
-  {
-    era: "Idade Média",
-    items: [
-      { ano: "séc. XIII", nome: "Óculos", desc: "Auxílio à visão." },
-      { ano: "—", nome: "Moinho de vento e água", desc: "Energia mecânica." },
-      { ano: "—", nome: "Bússola magnética", desc: "Navegação global." },
-      { ano: "—", nome: "Armadura e pólvora", desc: "Mudança bélica." },
-      { ano: "—", nome: "Universidades", desc: "Preservação do conhecimento." },
-    ],
-  },
-  {
-    era: "Idade Moderna",
-    items: [
-      { ano: "1450", nome: "Imprensa de Gutenberg", desc: "Disseminação do conhecimento." },
-      { ano: "1609", nome: "Telescópio de Galileu", desc: "Expansão da astronomia." },
-      { ano: "séc. XVIII", nome: "Máquina a vapor", desc: "Revolução Industrial." },
-      { ano: "1752-1800", nome: "Eletricidade", desc: "Benjamin Franklin e Volta." },
-      { ano: "1796", nome: "Vacinação", desc: "Início da medicina moderna." },
-    ],
-  },
-  {
-    era: "Século XIX",
-    items: [
-      { ano: "1837", nome: "Telégrafo", desc: "Comunicação instantânea." },
-      { ano: "1839", nome: "Fotografia", desc: "Registros visuais." },
-      { ano: "1876", nome: "Telefone", desc: "Comunicação à distância." },
-      { ano: "1879", nome: "Lâmpada elétrica", desc: "Iluminação prática." },
-      { ano: "1886", nome: "Automóvel", desc: "Transporte moderno." },
-      { ano: "1895", nome: "Cinema", desc: "Entretenimento em movimento." },
-      { ano: "1896", nome: "Rádio", desc: "Comunicação em massa." },
-    ],
-  },
-  {
-    era: "Século XX",
-    items: [
-      { ano: "1903", nome: "Avião", desc: "Aviação moderna." },
-      { ano: "1928", nome: "Antibióticos", desc: "Penicilina." },
-      { ano: "1946", nome: "Computadores
+    header {
+      background: linear-gradient(135deg, #4f46e5, #3b82f6);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background: #3b82f6;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+    }
+
+    .container {
+      padding: 1rem 2rem;
+      position: relative;
+      background: inherit;
+      width: 50%;
+    }
+
+    .container.left {
+      left: 0;
+    }
+
+    .container.right {
+      left: 50%;
+    }
+
+    .content {
+      padding: 1rem 1.5rem;
+      background: white;
+      position: relative;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .container.left .content {
+      margin-left: 0;
+      margin-right: auto;
+    }
+
+    .container.right .content {
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      right: -10px;
+      background: #3b82f6;
+      border: 3px solid #fff;
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .container.right::before {
+      left: -10px;
+    }
+
+    h2 {
+      margin-top: 0;
+      color: #3b82f6;
+    }
+
+    @media screen and (max-width: 768px) {
+      .timeline::after {
+        left: 20px;
+      }
+
+      .container {
+        width: 100%;
+        padding-left: 3rem;
+        padding-right: 1rem;
+      }
+
+      .container.right {
+        left: 0%;
+      }
+
+      .container::before {
+        left: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📜 Linha do Tempo das Inovações Tecnológicas</h1>
+    <p>Da Pré-História à Era da Inteligência Artificial</p>
+  </header>
+
+  <div class="timeline">
+
+    <div class="container left">
+      <div class="content">
+        <h2>Era Pré-Histórica</h2>
+        <p>🔥 Fogo (c. 500.000 a.C.) – Controle do fogo.</p>
+        <p>🪨 Ferramentas de pedra (2,5 milhões a.C.).</p>
+        <p>🌾 Agricultura (10.000 a.C.).</p>
+        <p>🛞 Roda (3.500 a.C.).</p>
+        <p>✍ Escrita (3.200 a.C.).</p>
+      </div>
+    </div>
+
+    <div class="container right">
+      <div class="content">
+        <h2>Idade Antiga</h2>
+        <p>⚒ Metalurgia (Bronze e Ferro).</p>
+        <p>🏛 Engenharia romana (estradas, aquedutos).</p>
+        <p>📐 Matemática e Astronomia.</p>
+        <p>📜 Papel e Impressão (China, séc. II).</p>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div class="content">
+        <h2>Idade Média</h2>
+        <p>🌬 Moinhos de vento e água.</p>
+        <p>👓 Óculos (séc. XIII).</p>
+        <p>🧭 Bússola magnética.</p>
+        <p>💥 Pólvora e armaduras.</p>
+        <p>🎓 Universidades.</p>
+      </div>
+    </div>
+
+    <div class="container right">
+      <div class="content">
+        <h2>Idade Moderna</h2>
+        <p>📰 Imprensa de Gutenberg (1450).</p>
+        <p>🔭 Telescópio (1609).</p>
+        <p>🚂 Máquina a vapor (séc. XVIII).</p>
+        <p>⚡ Eletricidade (Volta, 1800).</p>
+        <p>💉 Vacinação (Jenner, 1796).</p>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div class="content">
+        <h2>Século XIX</h2>
+        <p>📡 Telégrafo (1837).</p>
+        <p>📷 Fotografia (1839).</p>
+        <p>☎ Telefone (1876).</p>
+        <p>💡 Lâmpada elétrica (1879).</p>
+        <p>🚗 Automóvel (1886).</p>
+        <p>🎬 Cinema (1895).</p>
+        <p>📻 Rádio (1896).</p>
+      </div>
+    </div>
+
+    <div class="container right">
+      <div class="content">
+        <h2>Século XX</h2>
+        <p>✈ Avião (1903).</p>
+        <p>💊 Antibióticos (1928).</p>
+        <p>🖥 ENIAC (1946).</p>
+        <p>☢ Energia nuclear (1940s).</p>
+        <p>🛰 Sputnik (1957).</p>
+        <p>🌐 Internet (1969).</p>
+        <p>🖱 PC (anos 70–80).</p>
+        <p>📱 Celular (1983).</p>
+        <p>🛰 GPS (1990).</p>
+        <p>💻 WWW (1991).</p>
+      </div>
+    </div>
+
+    <div class="container left">
+      <div class="content">
+        <h2>Século XXI</h2>
+        <p>📱 Smartphones (2007).</p>
+        <p>🌍 Redes sociais globais.</p>
+        <p>⚡ Carros elétricos e autônomos.</p>
+        <p>☁ Computação em nuvem.</p>
+        <p>🤖 IA e Machine Learning.</p>
+        <p>🖨 Impressão 3D.</p>
+        <p>🧬 CRISPR e biotecnologia.</p>
+        <p>⛓ Blockchain e criptomoedas.</p>
+        <p>🚀 SpaceX & Blue Origin.</p>
+        <p>📶 5G e IoT.</p>
+        <p>✨ IA Generativa (ChatGPT, 2022+).</p>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
